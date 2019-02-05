@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import org.opencv.core.*;
 import org.opencv.imgproc.*;
 
-//Randall wuz here
-
 /**
 * GripPipeline class.
 *
