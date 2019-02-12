@@ -15,7 +15,7 @@ import org.opencv.videoio.Videoio;
 public class Util {
     
     public static VideoCapture makeCamera(int device, int width, int height, double exposure) {
-        VideoCapture camera = new VideoCapture(0);
+        VideoCapture camera = new VideoCapture(device);
         camera.set(Videoio.CAP_PROP_FRAME_WIDTH, width);
         camera.set(Videoio.CAP_PROP_FRAME_HEIGHT, height);
         if (exposure > -1.0) {
