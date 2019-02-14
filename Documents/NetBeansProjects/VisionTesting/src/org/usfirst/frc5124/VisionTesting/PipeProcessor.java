@@ -12,9 +12,10 @@ import org.usfirst.frc5124.VisionTesting.GripPipeline.Line;
 
 public class PipeProcessor {
     
-    private double angle;
-    private double power;
-
+    private double cameraTargetX;
+    private double cameraTargetY;
+    private double cameraTargetDirection;
+    
     private static final double LINE_ENDPOINT_COMBINE_DISTANCE = 1;
     private static final double LINE_SLOPE_COMBINE_ANGLE_DIFFERENCE = 15;
     
@@ -72,15 +73,15 @@ public class PipeProcessor {
                 closestTargX = targX;
             }
         }
-        if (target == null) {
-            angle = 0;
-            power = 0;
+        if (target == null || targAngle == null) {
+            cameraTargetX = 0;
+            cameraTargetY = 0;
+            cameraTargetDirection = 0;
             return;
         }
-        InstructionPipeline spliner = new InstructionPipeline();
-        spliner.process(target.x, target.z, targAngle);
-        angle = spliner.getAngle();
-        power = spliner.getPower();
+        cameraTargetX = target.x;
+        cameraTargetY = target.z;
+        cameraTargetDirection = targAngle;
     }
     
     private static ArrayList<Line> combineSameLines(ArrayList<Line> lines) {
@@ -115,12 +116,16 @@ public class PipeProcessor {
         return newLines;
     }
 
-    public double getTurnAngle () {
-        return angle;
+    public double getCameraTargetX() {
+        return cameraTargetX;
     }
 
-    public double getPower () {
-        return power;
+    public double getCameraTargetY() {
+        return cameraTargetY;
+    }
+
+    public double getCameraTargetDirection() {
+        return cameraTargetDirection;
     }
     
     public static class TapeRectangle implements Comparable<TapeRectangle> {
